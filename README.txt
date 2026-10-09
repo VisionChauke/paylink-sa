@@ -1,4 +1,4 @@
-# PayLink SA — Open Payments Hackathon 2026
+# PayLink SA Open Payments Hackathon 2026
 
 A responsive front-end prototype for a simple payment experience aimed at spaza shops, street vendors, and local communities across South Africa.
 
