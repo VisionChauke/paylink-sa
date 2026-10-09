@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071b2c">
+  <meta name="description" content="PayLink SA a South African community payments hackathon prototype.">
+  <title>PayLink SA | Community Payments</title>
+  <link rel="icon" type="image/png" href="assets/paylink-icon.png">
+  <link rel="apple-touch-icon" href="assets/paylink-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" onclick="show('home'); return false;" aria-label="PayLink SA home">
+      <img src="assets/paylink-icon.png" alt="PayLink SA emblem">
+      <span>PayLink <b>SA</b></span>
+    </a>
+    <div class="prototype"><span class="status-dot"></span> Prototype mode</div>
+  </header>
+
+  <main>
+    <section id="home" class="screen active">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span>OPEN PAYMENTS HACKATHON 2026</div>
+          <h1>One payment identity.<br><em>Any community.</em></h1>
+          <p class="lead">A simpler way for informal businesses to receive payments designed for spaza shops, street vendors and communities across South Africa.</p>
+          <div class="hero-actions">
+            <button onclick="show('merchant')">Explore merchant demo <span aria-hidden="true">→</span></button>
+            <button class="button-outline" onclick="show('customer')">Try customer demo</button>
+          </div>
+          <div class="trust-line"><span>✓</span> Built for local businesses <span>·</span> Simulated demo payments</div>
+        </div>
+        <aside class="merchant-preview">
+          <div class="preview-top"><span class="mini-label">DEMO MERCHANT</span><span class="live-pill"><i></i> Active</span></div>
+          <div class="merchant-identity">
+            <div class="shop-avatar">TS</div>
+            <div><h2>Thandi's Spaza Shop</h2><p>Convenience store · South Africa</p></div>
+          </div>
+          <div class="preview-link"><span>paylink.sa/thandi-spaza</span><button class="copy-small" onclick="copyLink()">Copy</button></div>
+          <button class="qr-preview" onclick="show('customer')" aria-label="Open customer payment demo">
+            <span class="qr-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="qr-caption">Tap to open payment demo</span>
+          </button>
+          <div class="preview-foot"><span>🔒</span> Secure demo experience</div>
+        </aside>
+      </section>
+
+      <section class="feature-strip">
+        <div><span class="feature-icon">↗</span><div><b>One easy link</b><small>Share a payment identity</small></div></div>
+        <div><span class="feature-icon">▦</span><div><b>QR-ready experience</b><small>Designed for in-person payments</small></div></div>
+        <div><span class="feature-icon">◎</span><div><b>Clear transaction history</b><small>See payments at a glance</small></div></div>
+      </section>
+    </section>
+
+    <section id="merchant" class="screen">
+      <div class="page-heading"><div><div class="eyebrow">MERCHANT DASHBOARD</div><h1>Good morning, Thandi <span>👋</span></h1><p>Here's what's happening with your shop today.</p></div><button class="button-outline" onclick="show('home')">← Home</button></div>
+      <div class="stats">
+        <article class="stat-card"><div class="stat-label">Today's payments <span>↗</span></div><strong id="total">R450.00</strong><small class="positive">↑ Demo balance received</small></article>
+        <article class="stat-card"><div class="stat-label">Transactions <span>▤</span></div><strong id="count">18</strong><small>Payments recorded today</small></article>
+        <article class="stat-card"><div class="stat-label">Merchant status <span>●</span></div><strong class="green">Active</strong><small>Ready to receive demo payments</small></article>
+      </div>
+      <div class="dashboard-grid">
+        <article class="panel">
+          <div class="panel-heading"><div><h2>Receive a payment</h2><p>Share your link or let a customer start a demo payment.</p></div><span class="panel-icon">↗</span></div>
+          <label for="link">YOUR PAYLINK</label>
+          <div class="link-field"><input id="link" value="paylink.sa/thandi-spaza" readonly><button onclick="copyLink()">Copy link</button></div>
+          <div class="qr-holder"><span class="qr-art large" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span>Demo QR placeholder</span></div>
+          <button class="full-button" onclick="show('customer')">Open customer payment <span>→</span></button>
+        </article>
+        <article class="panel">
+          <div class="panel-heading"><div><h2>Recent transactions</h2><p>Your latest demo payments.</p></div><span class="panel-icon">↻</span></div>
+          <div id="tx" class="transactions">
+            <div class="tx"><span class="tx-mark">✓</span><div class="tx-main"><b>R50.00</b><small>Groceries · 2 min ago</small></div><i>Paid</i></div>
+            <div class="tx"><span class="tx-mark">✓</span><div class="tx-main"><b>R120.00</b><small>Food · 8 min ago</small></div><i>Paid</i></div>
+            <div class="tx"><span class="tx-mark">✓</span><div class="tx-main"><b>R30.00</b><small>Cold drink · 14 min ago</small></div><i>Paid</i></div>
+          </div>
+          <div class="demo-note">These transactions are sample data for the prototype.</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="customer" class="screen">
+      <div class="page-heading"><div><div class="eyebrow">CUSTOMER CHECKOUT</div><h1>Pay simply. Shop locally.</h1><p>Enter an amount to try the PayLink demo flow.</p></div><button class="button-outline" onclick="show('merchant')">← Merchant</button></div>
+      <article class="pay-card">
+        <div class="shop-avatar large-avatar">TS</div>
+        <h2>Thandi's Spaza Shop</h2><p class="verified">✓ Verified demo merchant</p>
+        <div class="form-divider"></div>
+        <form id="payment-form">
+          <label for="amount">Payment amount <span>(ZAR)</span></label>
+          <div class="amount-input"><span>R</span><input id="amount" type="number" min="1" max="1000000" step="0.01" placeholder="0.00" required></div>
+          <label for="desc">What are you paying for? <span>Optional</span></label>
+          <input class="text-input" id="desc" maxlength="80" placeholder="e.g. groceries, bread and milk">
+          <button class="full-button" type="submit">Continue to demo payment <span>→</span></button>
+        </form>
+        <div class="secure-note">🔒 <span>This is a simulated transaction. No money will move.</span></div>
+      </article>
+    </section>
+
+    <section id="processing" class="screen">
+      <article class="pay-card center-state"><div class="spinner"></div><h2>Preparing your payment…</h2><p>Connecting to the PayLink demo flow.</p><small>Please wait a moment.</small></article>
+    </section>
+
+    <section id="success" class="screen">
+      <article class="pay-card center-state success-card">
+        <div class="success-icon">✓</div><div class="eyebrow">DEMO PAYMENT COMPLETE</div>
+        <h1 id="paid">R50.00</h1><p>Payment recorded for <b>Thandi's Spaza Shop</b>.</p>
+        <div class="receipt">
+          <div><span>Status</span><b class="green">Completed (simulated)</b></div>
+          <div><span>Reference</span><b id="ref">PL-000000</b></div>
+          <div><span>Method</span><b>PayLink demo</b></div>
+          <div><span>Description</span><b id="receipt-desc">Customer payment</b></div>
+        </div>
+        <button class="full-button" onclick="show('merchant')">Back to merchant dashboard</button>
+        <button class="text-button" onclick="show('customer')">Make another demo payment</button>
+      </article>
+    </section>
+  </main>
+
+  <footer><span class="footer-brand">PayLink SA</span><span>Open Payments Hackathon 2026</span><span>Prototype only · No real payments are processed</span></footer>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
