@@ -97,6 +97,4 @@ Edit the CSS custom properties at the top of `style.css`, including `--navy`, `-
 4. Add authentication, authorization, input validation, audit logging, and secure secret management.
 5. Add automated tests and deployment configuration.
 
-## License
 
-No license has been specified. Add a `LICENSE` file before distributing or reusing the project if you want to define its usage terms.
